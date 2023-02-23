@@ -248,9 +248,7 @@ pub enum InvalidIdentError {
 /// where code will be output as part of the `#[cxx::bridge]` mod.
 pub fn validate_ident_ok_for_cxx(id: &str) -> Result<(), InvalidIdentError> {
     validate_ident_ok_for_rust(id)?;
-    if id.contains("__") {
-        Err(InvalidIdentError::TooManyUnderscores)
-    } else if id.starts_with("_bindgen_ty_") {
+    if id.starts_with("_bindgen_ty_") {
         Err(InvalidIdentError::BindgenTy)
     } else {
         Ok(())
